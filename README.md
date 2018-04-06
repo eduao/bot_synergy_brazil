@@ -8,8 +8,8 @@
 
 # Setup
 
-* Realize o download do pyhton no servidor
+* Realize o download do python no servidor
 
 # Rodar? 
 
-* Apenas rode o comando `pyhton SynergyBOT.py`
+* Apenas rode o comando `python SynergyBOT.py`
