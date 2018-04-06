@@ -1,10 +1,10 @@
 {
-  "name": "TchospiraBOT",
-  "version": "1.0.0",
-  "description": "Greeter bot for Renesansz-Playground",
+  "name": "SynergyBrazilBOT",
+  "version": "0.0.1",
+  "description": "Bot para melhoria ",
   "main": "bot.js",
-  "repository": "git@github.com:renesansz/discord-greeter-bot.git",
-  "author": "Renemari Padillo",
+  "repository": "https://github.com/eduao/bot_synergy_brazil.git",
+  "author": "Eduardo 'tchospira' Oliveira",
   "license": "MIT",
   "dependencies": {
     "discord.io": "^2.5.3",
