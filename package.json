@@ -1,0 +1,13 @@
+{
+  "name": "TchospiraBOT",
+  "version": "1.0.0",
+  "description": "Greeter bot for Renesansz-Playground",
+  "main": "bot.js",
+  "repository": "git@github.com:renesansz/discord-greeter-bot.git",
+  "author": "Renemari Padillo",
+  "license": "MIT",
+  "dependencies": {
+    "discord.io": "^2.5.3",
+    "winston": "^2.4.0"
+  }
+}
