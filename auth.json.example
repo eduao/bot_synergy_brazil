@@ -1,0 +1,10 @@
+{
+   "token": "token-do-tamanho-do-universo",
+   "connection_db": {
+   		"host": "localhost",
+		"user": "user",
+		"passwd": "password",
+		"db_name": "databasename"
+   },
+   "channel_id": "id-do-canal"
+}
