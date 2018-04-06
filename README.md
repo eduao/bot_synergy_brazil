@@ -5,7 +5,11 @@
 # Pre-requisitos
 
 * Precisa ter Python
+
 # Setup
 
-* 
-# Rodar? Apenas rode o comando `pyhton SynergyBOT.py`
+* Realize o download do pyhton no servidor
+
+# Rodar? 
+
+* Apenas rode o comando `pyhton SynergyBOT.py`
