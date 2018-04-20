@@ -11,7 +11,6 @@ prefix = 's!'
 
 client = commands.Bot(command_prefix=prefix) #Initialise client bot
 
-set_prefix('s!')
 client = iniciar(client)
 #client.run(datas_json_auth["token"]) #Replace token with your bots token
 
