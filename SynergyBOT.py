@@ -7,44 +7,33 @@ import MySQLdb
 import json
 
 datas_json_auth = json.load(open('auth.json'))
-
-Client = discord.Client() #Initialise Client 
 prefix = 's!'
+
 client = commands.Bot(command_prefix=prefix) #Initialise client bot
+
+set_prefix('s!')
+client = iniciar(client)
+#client.run(datas_json_auth["token"]) #Replace token with your bots token
+
+#Client = discord.Client() #Initialise Client 
+
+# client = commands.Bot(command_prefix=prefix) #Initialise client bot
 #bot = commands.Bot(command_prefix='?', description=description)
 canal_id = str(datas_json_auth['channel_id']) # Obtain the id from default channel to the bot chat in
 database_connection = datas_json_auth['connection_db'] # Get the configurations to access the database
-
-def set_prefix(value):
-    global prefix
-    prefix = value
-
-def get_prefix():
-    return prefix
 
 @client.event
 async def on_ready():
     print("Bot is online and connected to Discord") #This will be called when the bot connects to the server
 
-@client.command()
-async def teste(ctx, arg1, arg2):
-    await ctx.send('You passed {} and {}'.format(arg1, arg2))
-
-@client.command(name = 'add')
-async def add(ctx, a: int, b: int):
-    await ctx.send(a+b)
-
 @client.event
 async def on_message(message):
     if canal_id: # Check if the var canal_id is setted
-        if message.content.startswith(get_prefix()):
-            cmd = message.content[len(get_prefix()):]
+        # await client.send_message(discord.Object(id=canal_id), prefix)
+        if message.content.startswith(prefix):
+            cmd = message.content[len(prefix):]
             if cmd:
                 # await client.send_message(discord.Object(id=canal_id), cmd)
-                if cmd.startswith('mudar_pref'):
-                    novo_pref = cmd[len('mudar_pref'):]
-                    set_prefix(novo_pref)
-                    await client.send_message(discord.Object(id=canal_id), get_prefix())
                 if cmd.startswith('comandos'):
                     comandos = 'Oi '+message.author.mention+' segue a lista de comandos disponíveis atualmente:\n'
                     await client.send_message(discord.Object(id=canal_id), comandos)
@@ -67,7 +56,7 @@ async def on_message(message):
                     if name:
                         await client.send_message(discord.Object(id=canal_id), '{} é o bixão meeeemo heeeeeein!!!!'.format(name))
                     else:
-                        await client.send_message(discord.Object(id=canal_id), 'coloque '+get_prefix()+passp+' <nome do bixão>')
+                        await client.send_message(discord.Object(id=canal_id), 'coloque '+prefix+passp+' <nome do bixão>')
                         
             else:
                 await client.send_message(discord.Object(id=canal_id), 'entrou com comando vazio')
@@ -81,5 +70,4 @@ async def on_message(message):
         
         # await client.send_message(message.channel, "Por favor, "+ message.author.mention + ", insira os comandos no canal de texto : "+discord.Object(id=canal_id))
                 
-
 client.run(datas_json_auth["token"]) #Replace token with your bots token
