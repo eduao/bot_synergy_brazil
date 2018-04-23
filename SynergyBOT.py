@@ -19,10 +19,13 @@ client = commands.Bot(command_prefix=prefix) #Initialise client bot
 #bot = commands.Bot(command_prefix='?', description=description)
 canal_id = str(datas_json_auth['channel_id']) # Obtain the id from default channel to the bot chat in
 database_connection = datas_json_auth['connection_db'] # Get the configurations to access the database
+#game_set = discord.Game(name=':: s!')
 
 @client.event
 async def on_ready():
     print("Bot is online and connected to Discord") #This will be called when the bot connects to the server
+    await client.change_presence(game=discord.Game(name='Somos todos s!'))
+    print('teste')
 
 @client.event
 async def on_message(message):
