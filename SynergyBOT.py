@@ -1,25 +1,29 @@
 ﻿import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
-# import asyncio
 import time
 import MySQLdb
 import json
+from pprint import pprint
+import collections
 
 # Busca as configurações do arquivo auth.json
 #   - o padrão encontra-se em auth.json.example
 datas_json_auth = json.load(open('auth.json'))
+
 # prefixo padrão será s!
 prefix = 's!'
+
 #inicializa o bot com o prefixo - prefix
 client = commands.Bot(command_prefix=prefix)
+
 # o id do canal é inserido no arquivo json
 # com isso ele só irá imprimir neste local, caso queira alterar esse cenário, 
 # há a necessidade de onde pergunta se é o canal_id
 canal_id = str(datas_json_auth['channel_id'])
+
 # informações para conectar ao banco de dados
 database_connection = datas_json_auth['connection_db'] # Get the configurations to access the database
-#game_set = discord.Game(name=':: s!')
 
 @client.event
 async def on_ready():
@@ -28,7 +32,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if canal_id: # Check if the var canal_id is setted
+    # Check if the var canal_id is setted
+    if canal_id: 
         # caso a mensagem inicie com o prefixo
         if message.content.startswith(prefix):
             # o comando é buscado da mensagem enviada
@@ -50,6 +55,28 @@ async def on_message(message):
                     comandos += '```'
                     # envia a mensagem para o canal_id a mensagem contida em comandos
                     await client.send_message(discord.Object(id=canal_id), comandos)
+                elif cmd.startswith('permissoes'):
+
+                    id_do_servidor = 369757421884801025
+
+                    servidor = discord.utils.get(client.servers, id=id_do_servidor)
+                    
+                    if message.server:
+                        id_do_servidor = message.server.id
+
+                    membros = discord.utils.get(message.server.members, id=message.author.id)
+
+                    def imprimir(roles):
+                        print('O usuário {} possui as permissões: {}'.format( message.author.mention, ' - '.join(role.name for role in roles)))
+
+                    if isinstance(membros, collections.Iterable):
+                        for s in membros:
+                            print('{} : {}'.format(s.id, s.name))
+                            imprimir(s.roles)
+                    else:
+                        imprimir(membros.roles)
+                    return
+                    
                 # caso o comando for cookie
                 elif cmd.startswith('cookie'): 
                     #responde para o canal_id o emoji cookie
@@ -78,6 +105,7 @@ async def on_message(message):
         # caso não seja enviado no canal apenas retorna
         else:
             return
+    # caso não tenha canal_id
     else:
         print("Vazio");
         exit();
